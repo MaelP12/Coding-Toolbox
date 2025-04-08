@@ -107,8 +107,22 @@
                     </h3>
                 </div>
                 <div class="card-body flex flex-col gap-5">
-                    Formulaire à créer
-                    <!-- @todo A compléter -->
+                    <form method="POST" class="card-body flex flex-col gap-5 p-10" action="{{ route('student.index') }}">
+                    @csrf
+                    <x-forms.input name="last_name" :label="__('Last Name')" />
+
+                    <x-forms.input name="first_name" :label="__('First Name')" />
+
+                    <x-forms.input name="email" :label="__('Email')" />
+
+                    <x-forms.input label="{{ __('Password') }}" name="password" type="password" :placeholder="__('Enter Password')"
+                                   :messages="$errors->get('password')"/>
+
+                    <x-forms.input type="date" name="year" :label="__('Date De Naissance')" placeholder="" />
+
+                    <x-forms.primary-button>
+                        {{ __('Valider') }}
+                    </x-forms.primary-button>
                 </div>
             </div>
         </div>

@@ -16,7 +16,6 @@
                         <h3 class="card-title">
                             Block 1
                         </h3>
-                        <a>Test Student</a>
                     </div>
                     <div class="card-body flex flex-col gap-5">
 

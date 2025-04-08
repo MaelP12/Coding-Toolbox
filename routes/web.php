@@ -31,8 +31,10 @@ Route::middleware('auth')->group(function () {
         // Teachers
         Route::get('/teachers', [TeacherController::class, 'index'])->name('teacher.index');
 
+
         // Students
         Route::get('students', [StudentController::class, 'index'])->name('student.index');
+        Route::post('students', [StudentController::class, 'create']);
 
         // Knowledge
         Route::get('knowledge', [KnowledgeController::class, 'index'])->name('knowledge.index');

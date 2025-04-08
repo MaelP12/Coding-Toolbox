@@ -1,4 +1,5 @@
 <x-app-layout>
+    <!-- _____________________________ -->
     <x-slot name="header">
         <h1 class="flex items-center gap-1 text-sm font-normal">
             <span class="text-gray-700">
@@ -16,6 +17,7 @@
                         <h3 class="card-title">
                             Block 1
                         </h3>
+                        <a>Test Admin</a>
                     </div>
                     <div class="card-body flex flex-col gap-5">
 
