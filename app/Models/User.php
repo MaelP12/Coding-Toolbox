@@ -23,6 +23,7 @@ class User extends Authenticatable
     protected $fillable = [
         'last_name',
         'first_name',
+        'birth_date',
         'email',
         'password',
     ];
@@ -81,4 +82,5 @@ class User extends Authenticatable
             ->withPivot('role')
             ->first();
     }
+
 }

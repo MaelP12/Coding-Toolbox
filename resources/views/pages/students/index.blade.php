@@ -120,6 +120,12 @@
 
                     <x-forms.input type="date" name="year" :label="__('Date De Naissance')" placeholder="" />
 
+                    <x-forms.dropdown name="school_id" :label="__('Schools')">
+                        @foreach($schools as $school)
+                            <option value="{{ $school->id }}">{{ $school->name }}</option>
+                        @endforeach
+                    </x-forms.dropdown>
+
                     <x-forms.primary-button>
                         {{ __('Valider') }}
                     </x-forms.primary-button>
