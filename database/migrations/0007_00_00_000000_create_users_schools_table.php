@@ -15,10 +15,14 @@ return new class extends Migration
             $table->engine = 'InnoDB';
 
             $table->id();
-            $table->unsignedBigInteger('user_id');
-            $table->unsignedBigInteger('school_id');
             $table->enum('role', ['admin', 'teacher', 'student'])->default('student');
             $table->timestamps();
+
+            $table->foreign('user_id')->references('id')->on('users')
+                ->onDelete('cascade');
+
+            $table->foreign('school_id')->references('id')->on('schools')
+                ->onDelete('cascade');
         });
     }
 

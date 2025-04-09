@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Models\UserSchool;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 
@@ -20,6 +21,10 @@ class StudentController extends Controller
             'first_name'    => $request->first_name,
             'email'         => $request->email,
             'password'      => Hash::make($request->password),
+        ]);
+
+        UserSchool::create([
+
         ]);
 
 
