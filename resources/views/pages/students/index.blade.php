@@ -107,29 +107,43 @@
                     </h3>
                 </div>
                 <div class="card-body flex flex-col gap-5">
-                    <form method="POST" class="card-body flex flex-col gap-5 p-10" action="{{ route('student.index') }}">
-                    @csrf
-                    <x-forms.input name="last_name" :label="__('Last Name')" />
+                    <form method="POST" class="card-body flex flex-col gap-5 p-5" action="{{ route('student.store') }}">
+                        @csrf
 
-                    <x-forms.input name="first_name" :label="__('First Name')" />
+                        <x-forms.input name="last_name" :label="__('Last Name')" value="{{old('last_name')}}"/>
+                        <x-forms.error name="last_name"/>
 
-                    <x-forms.input name="email" :label="__('Email')" />
+                        <x-forms.input name="first_name" :label="__('First Name')" />
+                        <x-forms.error name="first_name"/>
 
-                    <x-forms.input label="{{ __('Password') }}" name="password" type="password" :placeholder="__('Enter Password')"
-                                   :messages="$errors->get('password')"/>
+                        <x-forms.input name="email" :label="__('Email')" />
+                        <x-forms.error name="email"/>
 
-                    <x-forms.input type="date" name="year" :label="__('Date De Naissance')" placeholder="" />
+                        <x-forms.input label="{{ __('Password') }}" name="password" type="password" :placeholder="__('Enter Password')"/>
+                        <x-forms.error name="password"/>
 
-                    <x-forms.dropdown name="school_id" :label="__('Schools')">
-                        @foreach($schools as $school)
-                            <option value="{{ $school->id }}">{{ $school->name }}</option>
-                        @endforeach
-                    </x-forms.dropdown>
+                        <x-forms.input type="date" name="birth_date" :label="__('Birth Date')" placeholder="" />
+                        <x-forms.error name="birth_date"/>
 
-                    <x-forms.primary-button>
-                        {{ __('Valider') }}
-                    </x-forms.primary-button>
+                        <x-forms.dropdown name="school_id" :label="__('Schools')">
+                            @foreach($schools as $school)
+                                <option value="{{ $school->id }}">{{ $school->name }}</option>
+                            @endforeach
+                        </x-forms.dropdown>
+                        <x-forms.error name="school_id"/>
+
+                        <x-forms.primary-button>
+                            {{ __('Valider') }}
+                        </x-forms.primary-button>
+                    </form>
                 </div>
+
+                @if(session('success'))
+                    <div class="mt-4 mx-10 p-4 bg-green-100 border border-green-300 shadow-sm" style="color: rgb(22, 163, 74)">
+                        {{ session('success') }}
+                    </div>
+                @endif
+
             </div>
         </div>
     </div>

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\CreateStudentRequest;
 use App\Models\School;
 use App\Models\User;
 use App\Models\UserSchool;
@@ -20,15 +21,9 @@ class StudentController extends Controller
      * This function allows you to create a student database
      */
 
-    public function create(Request $request) {
+    public function store(CreateStudentRequest $request) {
 
-        $user = User::create([
-            'last_name'     => $request->last_name,
-            'first_name'    => $request->first_name,
-            'email'         => $request->email,
-            'birth_date'    => $request->year,
-            'password'      => Hash::make($request->password),
-        ]);
+        $user = User::create($request->validated());
 
         UserSchool::create([
             'user_id'   => $user->id,
@@ -36,7 +31,7 @@ class StudentController extends Controller
             'role'      => 'student'
         ]);
 
-        return redirect()->route('student.index')->with('succes','The student has been added successfully');
+        return redirect()->route('student.index')->with('success','The student has been added successfully');
     }
 
 }
