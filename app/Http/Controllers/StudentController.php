@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\CreateStudentRequest;
+use App\Http\Requests\UpdateStudentRequest;
 use App\Models\School;
 use App\Models\User;
 use App\Models\UserSchool;
@@ -14,7 +15,11 @@ class StudentController extends Controller
     public function index()
     {
         $schools = School::all();
-        return view('pages.students.index', compact('schools'));
+        $students = User::whereHas('userschool', function ($query) {
+            $query->where('role', 'student');
+        })->with('userschool')->get();
+
+        return view('pages.students.index', compact('schools', 'students'));
     }
 
     /**
@@ -33,5 +38,28 @@ class StudentController extends Controller
 
         return redirect()->route('student.index')->with('success','The student has been added successfully');
     }
+
+    public function getForm(User $student)
+    {
+        return response()->json($student);
+    }
+
+    public function update(UpdateStudentRequest $request, User $student)
+    {
+        $student->update($request->validated());
+        return redirect()->route('student.index')->with('success','The student has been updated successfully');
+    }
+
+    public function delete($id)
+    {
+        $user = User::findOrFail($id);
+
+        \DB::table('users_schools')->where('user_id', $user->id)->delete();
+
+        $user->delete();
+
+        return redirect()->route('student.index');
+    }
+
 
 }

@@ -22,7 +22,7 @@
                     <div class="card-body">
                         <div data-datatable="true" data-datatable-page-size="5">
                             <div class="scrollable-x-auto">
-                                <table class="table table-border" data-datatable-table="true">
+                                <table id="student-table" class="table table-border" data-datatable-table="true">
                                     <thead>
                                     <tr>
                                         <th class="min-w-[135px]">
@@ -47,42 +47,34 @@
                                     </tr>
                                     </thead>
                                     <tbody>
+                                    @foreach($students as $student)
                                         <tr>
-                                            <td>Doe</td>
-                                            <td>John</td>
+                                            <td>{{$student->last_name}}</td>
+                                            <td>{{$student->first_name}}</td>
                                             <td>12/02/2000</td>
                                             <td>
                                                 <div class="flex items-center justify-between">
-                                                    <a href="#">
-                                                        <i class="text-success ki-filled ki-shield-tick"></i>
-                                                    </a>
+                                                    <form action="{{ route('student.delete', $student->id) }}" method="POST" onsubmit="return confirm('Voulez-vous vraiment supprimer cet Ã©tudiant ?')">
+                                                        @csrf
+                                                        @method('DELETE')
+                                                        <button type="submit" class="cursor-pointer text-red-600">
+                                                            <i class="ki-filled ki-trash"></i>
+                                                        </button>
+                                                    </form>
 
-                                                    <a class="hover:text-primary cursor-pointer" href="#"
-                                                       data-modal-toggle="#student-modal">
+
+                                                    <a class="open-student-modal hover:text-primary cursor-pointer" href="#"
+                                                       data-modal-toggle="#student-modal" data-route="{{ route('student.form', $student) }}">
                                                         <i class="ki-filled ki-cursor"></i>
                                                     </a>
                                                 </div>
                                             </td>
                                         </tr>
-                                        <tr>
-                                            <td>Joe</td>
-                                            <td>Dohn</td>
-                                            <td>02/12/2000</td>
-                                            <td>
-                                                <div class="flex items-center justify-between">
-                                                    <a href="#">
-                                                        <i class="text-danger ki-filled ki-shield-cross"></i>
-                                                    </a>
-                                                    <a class="hover:text-primary cursor-pointer" href="#"
-                                                       data-modal-toggle="#student-modal">
-                                                        <i class="ki-filled ki-cursor"></i>
-                                                    </a>
-                                                </div>
-                                            </td>
-                                        </tr>
+                                    @endforeach
                                     </tbody>
                                 </table>
                             </div>
+
                             <div class="card-footer justify-center md:justify-between flex-col md:flex-row gap-5 text-gray-600 text-2sm font-medium">
                                 <div class="flex items-center gap-2 order-2 md:order-1">
                                     Show
@@ -110,8 +102,8 @@
                     <form method="POST" class="card-body flex flex-col gap-5 p-5" action="{{ route('student.store') }}">
                         @csrf
 
-                        <x-forms.input name="last_name" :label="__('Last Name')" value="{{old('last_name')}}"/>
-                        <x-forms.error name="last_name"/>
+                        <x-forms.input name="last_name" :label="__('Last Name')"/>
+                        <x-forms.error name="last_name" bag="create"/>
 
                         <x-forms.input name="first_name" :label="__('First Name')" />
                         <x-forms.error name="first_name"/>

@@ -2,9 +2,11 @@
 
 namespace App\Http\Requests;
 
+use App\Models\User;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
-class CreateStudentRequest extends FormRequest
+class UpdateStudentRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -21,20 +23,20 @@ class CreateStudentRequest extends FormRequest
      */
     public function rules(): array
     {
+        $student = $this->route('student');
 
         return [
-            'last_name' => ['required', 'string', 'max:255', 'regex:/^[A-Za-z-]+$/'],
-            'first_name' => ['required', 'string', 'max:255', 'regex:/^[A-Za-z-]+$/'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'password' => ['required', 'string', 'min:6'],
-            'birth_date' => ['required','date','after_or_equal:2000-01-01','before_or_equal:2025-12-31'],
+            'last_name' => ['string', 'max:255', 'regex:/^[A-Za-z-]+$/'],
+            'first_name' => ['string', 'max:255', 'regex:/^[A-Za-z-]+$/'],
+            'email' => ['required', 'string', 'email', 'max:255', Rule::unique('users')->ignore($student->id),],
+            'birth_date' => ['date','after_or_equal:2000-01-01','before_or_equal:2025-12-31'],
             'school_id' => ['required'],
         ];
     }
 
     public function getErrorBag()
     {
-        return 'create';
+        return 'update';
     }
 
 }
