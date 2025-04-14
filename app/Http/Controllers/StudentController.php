@@ -61,7 +61,6 @@ class StudentController extends Controller
         ]);
     }
 
-
     public function update(UpdateStudentRequest $request, User $student)
     {
         $student->update($request->validated());
