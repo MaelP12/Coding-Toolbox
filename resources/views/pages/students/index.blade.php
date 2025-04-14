@@ -54,7 +54,7 @@
                                             <td>12/02/2000</td>
                                             <td>
                                                 <div class="flex items-center justify-between">
-                                                    <form action="{{ route('student.delete', $student->id) }}" method="POST" onsubmit="return confirm('Voulez-vous vraiment supprimer cet Ã©tudiant ?')">
+                                                    <form action="{{ route('student.delete', $student->id) }}" method="POST" onsubmit="return confirm('Do you really want to delete this student?')">
                                                         @csrf
                                                         @method('DELETE')
                                                         <button type="submit" class="cursor-pointer text-red-600">

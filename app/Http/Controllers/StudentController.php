@@ -47,7 +47,8 @@ class StudentController extends Controller
             'first_name' => $student->first_name,
             'email' => $student->email,
             'birth_date' => $student->birth_date,
-            'school_id' => $student->firstSchool()?->id,
+            'school_id' => $student->school()?->id,
+
         ]);
     }
 
@@ -62,11 +63,11 @@ class StudentController extends Controller
     {
         $user = User::findOrFail($id);
 
-        \DB::table('users_schools')->where('user_id', $user->id)->delete();
+        UserSchool::where('user_id', $user->id)->delete();
 
         $user->delete();
 
-        return redirect()->route('student.index');
+        return redirect()->route('teacher.index');
     }
 
 

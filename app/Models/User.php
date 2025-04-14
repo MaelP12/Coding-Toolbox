@@ -82,17 +82,11 @@ class User extends Authenticatable
         return $this->hasOne(UserSchool::class);
     }
 
-    public function school() {
-        // With this, the user can only have 1 school
+    public function school()
+    {
         return $this->belongsToMany(School::class, 'users_schools')
             ->withPivot('role')
             ->first();
     }
-
-    public function firstSchool()
-    {
-        return $this->schools()->first();
-    }
-
 
 }

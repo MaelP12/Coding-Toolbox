@@ -37,41 +37,37 @@
                                                 <span class="sort-icon"></span>
                                             </span>
                                         </th>
+                                        <th class="min-w-[135px]">
+                                            <span class="sort">
+                                                <span class="sort-label">Email</span>
+                                                <span class="sort-icon"></span>
+                                            </span>
+                                        </th>
                                         <th class="w-[70px]"></th>
                                     </tr>
                                     </thead>
                                     <tbody>
+                                    @foreach($teachers as $teacher)
                                         <tr>
-                                            <td>Doe</td>
-                                            <td>John</td>
+                                            <td>{{$teacher->last_name}}</td>
+                                            <td>{{$teacher->first_name}}</td>
+                                            <td>{{$teacher->email}}</td>
                                             <td>
                                                 <div class="flex items-center justify-between">
-                                                    <a href="#">
-                                                        <i class="text-success ki-filled ki-shield-tick"></i>
-                                                    </a>
+                                                    <form action="{{ route('student.delete', $teacher->id) }}" method="POST" onsubmit="return confirm('Do you really want to delete this teacher?')">
+                                                        @csrf
+                                                        @method('DELETE')
+                                                        <button type="submit" class="cursor-pointer text-red-600">
+                                                            <i class="ki-filled ki-trash"></i>
+                                                        </button>
+                                                    </form>
 
-                                                    <a class="hover:text-primary cursor-pointer" href="#"
-                                                       data-modal-toggle="#student-modal">
-                                                        <i class="ki-filled ki-cursor"></i>
-                                                    </a>
+
+
                                                 </div>
                                             </td>
                                         </tr>
-                                        <tr>
-                                            <td>Joe</td>
-                                            <td>Dohn</td>
-                                            <td>
-                                                <div class="flex items-center justify-between">
-                                                    <a href="#">
-                                                        <i class="text-danger ki-filled ki-shield-cross"></i>
-                                                    </a>
-                                                    <a class="hover:text-primary cursor-pointer" href="#"
-                                                       data-modal-toggle="#student-modal">
-                                                        <i class="ki-filled ki-cursor"></i>
-                                                    </a>
-                                                </div>
-                                            </td>
-                                        </tr>
+                                    @endforeach
                                     </tbody>
                                 </table>
                             </div>
@@ -99,8 +95,32 @@
                     </h3>
                 </div>
                 <div class="card-body flex flex-col gap-5">
-                    Formulaire à créer
-                    <!-- @todo A compléter -->
+                    <form method="POST" class="card-body flex flex-col gap-5 p-5" action="{{ route('teacher.store') }}">
+                        @csrf
+
+                        <x-forms.input name="last_name" :label="__('Last Name')"/>
+                        <x-forms.error name="last_name" bag="create"/>
+
+                        <x-forms.input name="first_name" :label="__('First Name')" />
+                        <x-forms.error name="first_name"/>
+
+                        <x-forms.input name="email" :label="__('Email')" />
+                        <x-forms.error name="email"/>
+
+                        <x-forms.input label="{{ __('Password') }}" name="password" type="password" :placeholder="__('Enter Password')"/>
+                        <x-forms.error name="password"/>
+
+                        <x-forms.dropdown name="school_id" :label="__('Schools')">
+                            @foreach($schools as $school)
+                                <option value="{{ $school->id }}">{{ $school->name }}</option>
+                            @endforeach
+                        </x-forms.dropdown>
+                        <x-forms.error name="school_id"/>
+
+                        <x-forms.primary-button>
+                            {{ __('Valider') }}
+                        </x-forms.primary-button>
+                    </form>
                 </div>
             </div>
         </div>
