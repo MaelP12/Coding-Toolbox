@@ -3,7 +3,7 @@
     'title'  => 'Informations enseignant',] )
 
 @section('modal-content')
-    <form method="POST" class="card-body flex flex-col gap-5 p-5" action="{{ route('teacher.update', ['student' => $student]) }}">
+    <form method="POST" class="card-body flex flex-col gap-5 p-5" action="{{ route('teacher.update', ['teacher' => $teacher]) }}">
         @csrf
 
         <x-forms.input name="last_name" :label="__('Last Name')" />

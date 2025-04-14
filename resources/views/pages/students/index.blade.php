@@ -51,7 +51,7 @@
                                         <tr>
                                             <td>{{$student->last_name}}</td>
                                             <td>{{$student->first_name}}</td>
-                                            <td>12/02/2000</td>
+                                            <td>{{$student->birth_date}}</td>
                                             <td>
                                                 <div class="flex items-center justify-between">
                                                     <form action="{{ route('student.delete', $student->id) }}" method="POST" onsubmit="return confirm('Do you really want to delete this student?')">

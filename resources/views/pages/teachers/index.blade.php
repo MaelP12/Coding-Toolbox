@@ -22,7 +22,7 @@
                     <div class="card-body">
                         <div data-datatable="true" data-datatable-page-size="5">
                             <div class="scrollable-x-auto">
-                                <table class="table table-border" data-datatable-table="true">
+                                <table id="teacher-table" class="table table-border" data-datatable-table="true">
                                     <thead>
                                     <tr>
                                         <th class="min-w-[135px]">
@@ -54,7 +54,7 @@
                                             <td>{{$teacher->email}}</td>
                                             <td>
                                                 <div class="flex items-center justify-between">
-                                                    <form action="{{ route('student.delete', $teacher->id) }}" method="POST" onsubmit="return confirm('Do you really want to delete this teacher?')">
+                                                    <form action="{{ route('teacher.delete', $teacher->id) }}" method="POST" onsubmit="return confirm('Do you really want to delete this teacher?')">
                                                         @csrf
                                                         @method('DELETE')
                                                         <button type="submit" class="cursor-pointer text-red-600">
@@ -62,7 +62,10 @@
                                                         </button>
                                                     </form>
 
-
+                                                    <a class="open-teacher-modal hover:text-primary cursor-pointer" href="#"
+                                                       data-modal-toggle="#teacher-modal" data-route="{{ route('teacher.form', $teacher) }}">
+                                                        <i class="ki-filled ki-cursor"></i>
+                                                    </a>
 
                                                 </div>
                                             </td>
