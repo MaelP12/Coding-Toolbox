@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\CreateTeacherRequest;
 use App\Http\Requests\UpdateStudentRequest;
+use App\Http\Requests\UpdateTeacherRequest;
 use App\Models\School;
 use App\Models\User;
 use App\Models\UserSchool;
@@ -34,23 +35,22 @@ class TeacherController extends Controller
         return redirect()->route('teacher.index')->with('success','The student has been added successfully');
     }
 
-    public function getForm(User $student)
+    public function getForm(User $teacher)
     {
         return response()->json([
-            'id' => $student->id,
-            'last_name' => $student->last_name,
-            'first_name' => $student->first_name,
-            'email' => $student->email,
-            'birth_date' => $student->birth_date,
-            'school_id' => $student->firstSchool()?->id,
+            'id' => $teacher->id,
+            'last_name' => $teacher->last_name,
+            'first_name' => $teacher->first_name,
+            'email' => $teacher->email,
+            'school_id' => $teacher->school()?->id,
         ]);
     }
 
 
-    public function update(UpdateStudentRequest $request, User $student)
+    public function update(UpdateTeacherRequest $request, User $teacher)
     {
-        $student->update($request->validated());
-        return redirect()->route('student.index')->with('success','The student has been updated successfully');
+        $teacher->update($request->validated());
+        return redirect()->route('teacher.index')->with('success','The student has been updated successfully');
     }
 
     public function delete($id)
@@ -61,6 +61,6 @@ class TeacherController extends Controller
 
         $user->delete();
 
-        return redirect()->route('student.index');
+        return redirect()->route('teacher.index');
     }
 }

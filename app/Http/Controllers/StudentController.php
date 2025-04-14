@@ -67,7 +67,7 @@ class StudentController extends Controller
 
         $user->delete();
 
-        return redirect()->route('teacher.index');
+        return redirect()->route('student.index');
     }
 
 

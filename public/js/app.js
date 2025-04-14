@@ -10441,12 +10441,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _bootstrap__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 /* harmony import */ var _formsstudents__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./formsstudents */ "./resources/js/formsstudents.js");
 /* harmony import */ var _formsstudents__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_formsstudents__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var alpinejs__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! alpinejs */ "./node_modules/alpinejs/dist/module.esm.js");
+/* harmony import */ var _formsteachers__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./formsteachers */ "./resources/js/formsteachers.js");
+/* harmony import */ var _formsteachers__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_formsteachers__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var alpinejs__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! alpinejs */ "./node_modules/alpinejs/dist/module.esm.js");
 
 
 
-window.Alpine = alpinejs__WEBPACK_IMPORTED_MODULE_2__["default"];
-alpinejs__WEBPACK_IMPORTED_MODULE_2__["default"].start();
+
+window.Alpine = alpinejs__WEBPACK_IMPORTED_MODULE_3__["default"];
+alpinejs__WEBPACK_IMPORTED_MODULE_3__["default"].start();
 
 /***/ }),
 
@@ -10484,6 +10487,31 @@ document.addEventListener('DOMContentLoaded', function () {
         document.querySelector('#student-modal input[name="email"]').value = user.email;
         document.querySelector('#student-modal input[name="birth_date"]').value = user.birth_date;
         document.querySelector('#student-modal select[name="school_id"]').value = user.school_id;
+      });
+    });
+  });
+});
+
+/***/ }),
+
+/***/ "./resources/js/formsteachers.js":
+/*!***************************************!*\
+  !*** ./resources/js/formsteachers.js ***!
+  \***************************************/
+/***/ (() => {
+
+document.addEventListener('DOMContentLoaded', function () {
+  document.querySelectorAll('#teacher-table .open-teacher-modal').forEach(function (link) {
+    link.addEventListener('click', function (event) {
+      var url = link.getAttribute('data-route');
+      fetch(url).then(function (response) {
+        return response.json();
+      }).then(function (user) {
+        console.log(user);
+        document.querySelector('#teacher-modal input[name="last_name"]').value = user.last_name;
+        document.querySelector('#teacher-modal input[name="first_name"]').value = user.first_name;
+        document.querySelector('#teacher-modal input[name="email"]').value = user.email;
+        document.querySelector('#teacher-modal select[name="school_id"]').value = user.school_id;
       });
     });
   });
