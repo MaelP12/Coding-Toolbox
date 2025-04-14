@@ -79,7 +79,7 @@ class User extends Authenticatable
 
     public function userschool()
     {
-        return $this->hasOne(UserSchool::class); // ou hasMany()
+        return $this->hasOne(UserSchool::class);
     }
 
     public function school() {
@@ -88,5 +88,11 @@ class User extends Authenticatable
             ->withPivot('role')
             ->first();
     }
+
+    public function firstSchool()
+    {
+        return $this->schools()->first();
+    }
+
 
 }

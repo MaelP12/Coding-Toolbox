@@ -41,8 +41,16 @@ class StudentController extends Controller
 
     public function getForm(User $student)
     {
-        return response()->json($student);
+        return response()->json([
+            'id' => $student->id,
+            'last_name' => $student->last_name,
+            'first_name' => $student->first_name,
+            'email' => $student->email,
+            'birth_date' => $student->birth_date,
+            'school_id' => $student->firstSchool()?->id,
+        ]);
     }
+
 
     public function update(UpdateStudentRequest $request, User $student)
     {

@@ -10439,8 +10439,8 @@ process.umask = function() { return 0; };
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _bootstrap__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
-/* harmony import */ var _formstudent__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./formstudent */ "./resources/js/formstudent.js");
-/* harmony import */ var _formstudent__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_formstudent__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _formsstudents__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./formsstudents */ "./resources/js/formsstudents.js");
+/* harmony import */ var _formsstudents__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_formsstudents__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var alpinejs__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! alpinejs */ "./node_modules/alpinejs/dist/module.esm.js");
 
 
@@ -10465,10 +10465,10 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 
 /***/ }),
 
-/***/ "./resources/js/formstudent.js":
-/*!*************************************!*\
-  !*** ./resources/js/formstudent.js ***!
-  \*************************************/
+/***/ "./resources/js/formsstudents.js":
+/*!***************************************!*\
+  !*** ./resources/js/formsstudents.js ***!
+  \***************************************/
 /***/ (() => {
 
 document.addEventListener('DOMContentLoaded', function () {
@@ -10478,11 +10478,12 @@ document.addEventListener('DOMContentLoaded', function () {
       fetch(url).then(function (response) {
         return response.json();
       }).then(function (user) {
+        console.log(user);
         document.querySelector('#student-modal input[name="last_name"]').value = user.last_name;
         document.querySelector('#student-modal input[name="first_name"]').value = user.first_name;
         document.querySelector('#student-modal input[name="email"]').value = user.email;
         document.querySelector('#student-modal input[name="birth_date"]').value = user.birth_date;
-        document.querySelector('#student-modal select[name="school_id"]').value = userschool.school_id;
+        document.querySelector('#student-modal select[name="school_id"]').value = user.school_id;
       });
     });
   });
