@@ -1,5 +1,5 @@
 import './bootstrap';
-import './formstudent';
+import './formsstudents';
 
 import Alpine from 'alpinejs';
 
