@@ -26,7 +26,6 @@ class CreateStudentRequest extends FormRequest
             'last_name' => ['required', 'string', 'max:255', 'regex:/^[A-Za-z-]+$/'],
             'first_name' => ['required', 'string', 'max:255', 'regex:/^[A-Za-z-]+$/'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'password' => ['required', 'string', 'min:6'],
             'birth_date' => ['required','date','after_or_equal:2000-01-01','before_or_equal:2025-12-31'],
             'school_id' => ['required'],
         ];

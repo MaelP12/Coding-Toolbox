@@ -111,9 +111,6 @@
                         <x-forms.input name="email" :label="__('Email')" />
                         <x-forms.error name="email"/>
 
-                        <x-forms.input label="{{ __('Password') }}" name="password" type="password" :placeholder="__('Enter Password')"/>
-                        <x-forms.error name="password"/>
-
                         <x-forms.input type="date" name="birth_date" :label="__('Birth Date')" placeholder="" />
                         <x-forms.error name="birth_date"/>
 

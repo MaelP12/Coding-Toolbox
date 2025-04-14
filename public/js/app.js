@@ -10439,10 +10439,10 @@ process.umask = function() { return 0; };
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _bootstrap__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
-/* harmony import */ var _formsstudents__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./formsstudents */ "./resources/js/formsstudents.js");
-/* harmony import */ var _formsstudents__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_formsstudents__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _formsteachers__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./formsteachers */ "./resources/js/formsteachers.js");
-/* harmony import */ var _formsteachers__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_formsteachers__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _studentformfilling__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./studentformfilling */ "./resources/js/studentformfilling.js");
+/* harmony import */ var _studentformfilling__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_studentformfilling__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _teacherformfilling__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./teacherformfilling */ "./resources/js/teacherformfilling.js");
+/* harmony import */ var _teacherformfilling__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_teacherformfilling__WEBPACK_IMPORTED_MODULE_2__);
 /* harmony import */ var alpinejs__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! alpinejs */ "./node_modules/alpinejs/dist/module.esm.js");
 
 
@@ -10468,10 +10468,10 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 
 /***/ }),
 
-/***/ "./resources/js/formsstudents.js":
-/*!***************************************!*\
-  !*** ./resources/js/formsstudents.js ***!
-  \***************************************/
+/***/ "./resources/js/studentformfilling.js":
+/*!********************************************!*\
+  !*** ./resources/js/studentformfilling.js ***!
+  \********************************************/
 /***/ (() => {
 
 document.addEventListener('DOMContentLoaded', function () {
@@ -10494,10 +10494,10 @@ document.addEventListener('DOMContentLoaded', function () {
 
 /***/ }),
 
-/***/ "./resources/js/formsteachers.js":
-/*!***************************************!*\
-  !*** ./resources/js/formsteachers.js ***!
-  \***************************************/
+/***/ "./resources/js/teacherformfilling.js":
+/*!********************************************!*\
+  !*** ./resources/js/teacherformfilling.js ***!
+  \********************************************/
 /***/ (() => {
 
 document.addEventListener('DOMContentLoaded', function () {
