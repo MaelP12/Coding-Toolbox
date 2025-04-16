@@ -9,30 +9,48 @@
     </x-slot>
 
     <!-- begin: grid -->
-    <div class="grid lg:grid-cols-3 gap-5 lg:gap-7.5 items-stretch">
-        <div class="lg:col-span-2">
-            <div class="grid">
-                <div class="card card-grid h-full min-w-full">
-                    <div class="card-header">
-                        <h3 class="card-title">
-                            Block 1
-                        </h3>
-                        <a>Test Admin</a>
-                    </div>
-                    <div class="card-body flex flex-col gap-5">
-
-                    </div>
+    <div class="grid lg:grid-cols-2 gap-5 lg:gap-7.5 items-stretch">
+        <div class="col-lg-4">
+            <div class="card h-100">
+                <div class="card-header d-flex justify-content-center align-items-center gap-5">
+                    <h3 class="card-title m-0">Promotion</h3>
+                    <span class="fs-2 fw-bold">{{$cohortcount}}</span>
+                </div>
+                <div class="card-footer d-flex justify-center">
+                    <a href="/cohorts" class="btn btn-link">Link</a>
                 </div>
             </div>
         </div>
-        <div class="lg:col-span-1">
-            <div class="card card-grid h-full min-w-full">
-                <div class="card-header">
-                    <h3 class="card-title">
-                        Block 2
-                    </h3>
+        <div class="col-lg-4">
+            <div class="card h-100">
+                <div class="card-header d-flex justify-content-center align-items-center gap-5">
+                    <h3 class="card-title m-0">Groups</h3>
+                    <span class="fs-2 fw-bold">7</span>
                 </div>
-                <div class="card-body flex flex-col gap-5">
+                <div class="card-footer d-flex justify-center">
+                    <a href="/groups" class="btn btn-link">Link</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4">
+            <div class="card h-100">
+                <div class="card-header d-flex justify-content-center align-items-center gap-5">
+                    <h3 class="card-title m-0">Students</h3>
+                    <span class="fs-2 fw-bold">{{$studentcount}}</span>
+                </div>
+                <div class="card-footer d-flex justify-center">
+                    <a href="/students" class="btn btn-link">Link</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4">
+            <div class="card h-100">
+                <div class="card-header d-flex justify-content-center align-items-center gap-5">
+                    <h3 class="card-title m-0">Teacher</h3>
+                    <span class="fs-2 fw-bold">{{$teachercount}}</span>
+                </div>
+                <div class="card-footer d-flex justify-center">
+                    <a href="/teachers" class="btn btn-link">Link</a>
                 </div>
             </div>
         </div>

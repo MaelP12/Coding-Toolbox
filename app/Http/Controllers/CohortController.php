@@ -84,11 +84,11 @@ class CohortController extends Controller
             $query->where('cohort_id', $cohort->id);
         })->get();
 
-        $studentsall = User::all();
+        $users = User::all();
 
         $cohorts = Cohort::all();
 
-        return view('pages.cohorts.show', compact('students', 'studentsall' , 'cohort' , 'cohorts'));
+        return view('pages.cohorts.show', compact('students', 'users' , 'cohort' , 'cohorts'));
     }
 
     public function add(Request $request, $cohort) {

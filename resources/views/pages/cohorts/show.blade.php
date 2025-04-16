@@ -98,8 +98,8 @@
                     <form action="{{route('cohort.add', $cohort)}}", method="POST">
                         @csrf
                         <x-forms.dropdown name="user_id" :label="__('Etudiant')">
-                            @foreach($studentsall as $studentall)
-                                <option value="{{ $studentall->id }}">{{ $studentall->last_name }} {{ $studentall->first_name }}</option>
+                            @foreach($users as $user)
+                                <option value="{{ $user->id }}">{{ $user->last_name }} {{ $user->first_name }}</option>
                             @endforeach
                         </x-forms.dropdown>
 
