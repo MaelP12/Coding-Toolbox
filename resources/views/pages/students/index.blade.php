@@ -22,7 +22,7 @@
                     <div class="card-body">
                         <div data-datatable="true" data-datatable-page-size="5">
                             <div class="scrollable-x-auto">
-                                <table class="table table-border" data-datatable-table="true">
+                                <table id="student-table" class="table table-border" data-datatable-table="true">
                                     <thead>
                                     <tr>
                                         <th class="min-w-[135px]">
@@ -47,42 +47,42 @@
                                     </tr>
                                     </thead>
                                     <tbody>
+                                    @if ($students->isEmpty())
                                         <tr>
-                                            <td>Doe</td>
-                                            <td>John</td>
-                                            <td>12/02/2000</td>
+                                            <td colspan="5" class="text-center text-gray-500">
+                                                No students create
+                                            </td>
+                                        </tr>
+                                    @else
+                                    @foreach($students as $student)
+                                        <tr>
+                                            <td>{{$student->last_name}}</td>
+                                            <td>{{$student->first_name}}</td>
+                                            <td>{{$student->birth_date}}</td>
                                             <td>
                                                 <div class="flex items-center justify-between">
-                                                    <a href="#">
-                                                        <i class="text-success ki-filled ki-shield-tick"></i>
-                                                    </a>
+                                                    <form action="{{ route('student.delete', $student->id) }}" method="POST" onsubmit="return confirm('Do you really want to delete this student?')">
+                                                        @csrf
+                                                        @method('DELETE')
+                                                        <button type="submit" class="cursor-pointer text-red-600">
+                                                            <i class="ki-filled ki-trash"></i>
+                                                        </button>
+                                                    </form>
 
-                                                    <a class="hover:text-primary cursor-pointer" href="#"
-                                                       data-modal-toggle="#student-modal">
+
+                                                    <a class="open-student-modal hover:text-primary cursor-pointer" href="#"
+                                                       data-modal-toggle="#student-modal" data-route="{{ route('student.form', $student) }}">
                                                         <i class="ki-filled ki-cursor"></i>
                                                     </a>
                                                 </div>
                                             </td>
                                         </tr>
-                                        <tr>
-                                            <td>Joe</td>
-                                            <td>Dohn</td>
-                                            <td>02/12/2000</td>
-                                            <td>
-                                                <div class="flex items-center justify-between">
-                                                    <a href="#">
-                                                        <i class="text-danger ki-filled ki-shield-cross"></i>
-                                                    </a>
-                                                    <a class="hover:text-primary cursor-pointer" href="#"
-                                                       data-modal-toggle="#student-modal">
-                                                        <i class="ki-filled ki-cursor"></i>
-                                                    </a>
-                                                </div>
-                                            </td>
-                                        </tr>
+                                    @endforeach
+                                    @endif
                                     </tbody>
                                 </table>
                             </div>
+
                             <div class="card-footer justify-center md:justify-between flex-col md:flex-row gap-5 text-gray-600 text-2sm font-medium">
                                 <div class="flex items-center gap-2 order-2 md:order-1">
                                     Show
@@ -107,23 +107,40 @@
                     </h3>
                 </div>
                 <div class="card-body flex flex-col gap-5">
-                    <form method="POST" class="card-body flex flex-col gap-5 p-10" action="{{ route('student.index') }}">
-                    @csrf
-                    <x-forms.input name="last_name" :label="__('Last Name')" />
+                    <form method="POST" class="card-body flex flex-col gap-5 p-5" action="{{ route('student.store') }}">
+                        @csrf
 
-                    <x-forms.input name="first_name" :label="__('First Name')" />
+                        <x-forms.input name="last_name" :label="__('Last Name')"/>
+                        <x-forms.error name="last_name" bag="create"/>
 
-                    <x-forms.input name="email" :label="__('Email')" />
+                        <x-forms.input name="first_name" :label="__('First Name')" />
+                        <x-forms.error name="first_name"/>
 
-                    <x-forms.input label="{{ __('Password') }}" name="password" type="password" :placeholder="__('Enter Password')"
-                                   :messages="$errors->get('password')"/>
+                        <x-forms.input name="email" :label="__('Email')" />
+                        <x-forms.error name="email"/>
 
-                    <x-forms.input type="date" name="year" :label="__('Date De Naissance')" placeholder="" />
+                        <x-forms.input type="date" name="birth_date" :label="__('Birth Date')" placeholder="" />
+                        <x-forms.error name="birth_date"/>
 
-                    <x-forms.primary-button>
-                        {{ __('Valider') }}
-                    </x-forms.primary-button>
+                        <x-forms.dropdown name="school_id" :label="__('Schools')">
+                            @foreach($schools as $school)
+                                <option value="{{ $school->id }}">{{ $school->name }}</option>
+                            @endforeach
+                        </x-forms.dropdown>
+                        <x-forms.error name="school_id"/>
+
+                        <x-forms.primary-button>
+                            {{ __('Valider') }}
+                        </x-forms.primary-button>
+                    </form>
                 </div>
+
+                @if(session('success'))
+                    <div class="mt-4 mx-10 p-4 bg-green-100 border border-green-300 shadow-sm" style="color: rgb(22, 163, 74)">
+                        {{ session('success') }}
+                    </div>
+                @endif
+
             </div>
         </div>
     </div>

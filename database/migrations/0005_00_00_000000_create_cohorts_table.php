@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string('description');
             $table->datetime('start_date');
             $table->datetime('end_date');
+            $table->string('address');
             $table->timestamps();
 
             $table->foreign('school_id')->references('id')->on('schools')

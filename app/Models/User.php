@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use App\Models\UserSchool;
 
 class User extends Authenticatable
 {
@@ -23,6 +24,7 @@ class User extends Authenticatable
     protected $fillable = [
         'last_name',
         'first_name',
+        'birth_date',
         'email',
         'password',
     ];
@@ -73,12 +75,26 @@ class User extends Authenticatable
      */
 
     /**
-     * @return (Model&object)|null
+     * @return HasMany
      */
-    public function school() {
-        // With this, the user can only have 1 school
+
+//    public function usertest()
+//    {
+//        return $this->hasMany(UserSchool::class);
+//    }
+
+    public function userschool()
+    {
+        return $this->hasMany(UserSchool::class);
+    }
+
+
+
+    public function school()
+    {
         return $this->belongsToMany(School::class, 'users_schools')
             ->withPivot('role')
             ->first();
     }
+
 }

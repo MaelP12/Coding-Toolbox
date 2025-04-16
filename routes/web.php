@@ -27,14 +27,27 @@ Route::middleware('auth')->group(function () {
         // Cohorts
         Route::get('/cohorts', [CohortController::class, 'index'])->name('cohort.index');
         Route::get('/cohort/{cohort}', [CohortController::class, 'show'])->name('cohort.show');
+        Route::post('/cohort/{cohort}/add', [CohortController::class, 'add'])->name('cohort.add');
+        Route::delete('/cohort/{id}/del', [CohortController::class, 'del'])->name('cohort.del');
+        Route::post('cohort', [CohortController::class, 'store'])->name('cohort.store');
+        Route::post('cohort/update/{cohort}', [CohortController::class, 'update'])->name('cohort.update');
+        Route::get('cohort/form/{cohort}', [CohortController::class, 'getForm'])->name('cohort.form');
+        Route::delete('cohort/delete/{id}', [CohortController::class, 'delete'])->name('cohort.delete');
 
         // Teachers
         Route::get('/teachers', [TeacherController::class, 'index'])->name('teacher.index');
+        Route::post('teachers', [TeacherController::class, 'store'])->name('teacher.store');
+        Route::post('teachers/update/{teacher}', [TeacherController::class, 'update'])->name('teacher.update');
+        Route::get('teachers/form/{teacher}', [TeacherController::class, 'getForm'])->name('teacher.form');
+        Route::delete('teachers/delete/{id}', [TeacherController::class, 'delete'])->name('teacher.delete');
 
 
         // Students
         Route::get('students', [StudentController::class, 'index'])->name('student.index');
-        Route::post('students', [StudentController::class, 'create']);
+        Route::post('students', [StudentController::class, 'store'])->name('student.store');
+        Route::post('students/update/{student}', [StudentController::class, 'update'])->name('student.update');
+        Route::get('students/form/{student}', [StudentController::class, 'getForm'])->name('student.form');
+        Route::delete('students/delete/{id}', [StudentController::class, 'delete'])->name('student.delete');
 
         // Knowledge
         Route::get('knowledge', [KnowledgeController::class, 'index'])->name('knowledge.index');

@@ -10,7 +10,7 @@
     @if($label)
         <label class="form-label font-normal text-gray-900">{{ $label }}</label>
     @endif
-    <select class="select" name="select" {{ $disabled ? 'disabled' : '' }} name="{{ $name }}">
+    <select class="select" name="{{ $name }}" {{ $disabled ? 'disabled' : '' }}>
         {{ $slot }}
     </select>
 
@@ -18,4 +18,3 @@
         <x-forms.input-error :messages="$messages" class="mt-1" />
     @endif
 </div>
-
