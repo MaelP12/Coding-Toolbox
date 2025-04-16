@@ -41,14 +41,33 @@
                                     </tr>
                                     </thead>
                                     <tbody>
+                                    @if ($students->isEmpty())
                                         <tr>
-                                        <td>Doe</td>
-                                        <td>John</td>
-                                        <td>10/02/2000</td>
-                                        <td class="cursor-pointer pointer">
-                                            <i class="ki-filled ki-trash"></i>
-                                        </td>
-                                    </tr>
+                                            <td colspan="5" class="text-center text-gray-500">
+                                                No students create
+                                            </td>
+                                        </tr>
+                                    @else
+                                        @foreach($students as $student)
+                                            <tr>
+                                                <td>{{$student->last_name}}</td>
+                                                <td>{{$student->first_name}}</td>
+                                                <td>{{$student->birth_date}}</td>
+                                                <td>
+                                                    <div class="flex items-center justify-between">
+                                                        <form action="{{ route('cohort.del', $student->id) }}" method="POST" onsubmit="return confirm('Do you really want to delete this student?')">
+                                                            @csrf
+                                                            @method('DELETE')
+                                                            <button type="submit" class="cursor-pointer text-red-600">
+                                                                <i class="ki-filled ki-trash"></i>
+                                                            </button>
+                                                        </form>
+
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        @endforeach
+                                    @endif
                                     </tbody>
                                 </table>
                             </div>
@@ -75,14 +94,19 @@
                         Ajouter un étudiant à la promotion
                     </h3>
                 </div>
-                <div class="card-body flex flex-col gap-5">
-                    <x-forms.dropdown name="user_id" :label="__('Etudiant')">
-                        <option value="1">Etudiant 1</option>
-                    </x-forms.dropdown>
+                <div class="card-body flex flex-col gap-5">-
+                    <form action="{{route('cohort.add', $cohort)}}", method="POST">
+                        @csrf
+                        <x-forms.dropdown name="user_id" :label="__('Etudiant')">
+                            @foreach($studentsall as $studentall)
+                                <option value="{{ $studentall->id }}">{{ $studentall->last_name }} {{ $studentall->first_name }}</option>
+                            @endforeach
+                        </x-forms.dropdown>
 
-                    <x-forms.primary-button>
-                        {{ __('Valider') }}
-                    </x-forms.primary-button>
+                        <x-forms.primary-button>
+                            {{ __('Valider') }}
+                        </x-forms.primary-button>
+                    </form>
                 </div>
             </div>
         </div>

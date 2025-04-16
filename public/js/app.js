@@ -5924,14 +5924,14 @@ function buildURL(url, params, options) {
   if (!params) {
     return url;
   }
-
+  
   const _encode = options && options.encode || encode;
 
   if (_utils_js__WEBPACK_IMPORTED_MODULE_0__["default"].isFunction(options)) {
     options = {
       serialize: options
     };
-  }
+  } 
 
   const serializeFn = options && options.serialize;
 
@@ -10444,11 +10444,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _teacherformfilling__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./teacherformfilling */ "./resources/js/teacherformfilling.js");
 /* harmony import */ var _teacherformfilling__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_teacherformfilling__WEBPACK_IMPORTED_MODULE_2__);
 /* harmony import */ var alpinejs__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! alpinejs */ "./node_modules/alpinejs/dist/module.esm.js");
-/* harmony import */ var _formsstudents__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./formsstudents */ "./resources/js/formsstudents.js");
-/* harmony import */ var _formsstudents__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_formsstudents__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _formsteachers__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./formsteachers */ "./resources/js/formsteachers.js");
-/* harmony import */ var _formsteachers__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_formsteachers__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var alpinejs__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! alpinejs */ "./node_modules/alpinejs/dist/module.esm.js");
 
 
 
@@ -10473,10 +10468,10 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 
 /***/ }),
 
-/***/ "./resources/js/formstudent.js":
-/*!*************************************!*\
-  !*** ./resources/js/formstudent.js ***!
-  \*************************************/
+/***/ "./resources/js/studentformfilling.js":
+/*!********************************************!*\
+  !*** ./resources/js/studentformfilling.js ***!
+  \********************************************/
 /***/ (() => {
 
 document.addEventListener('DOMContentLoaded', function () {
@@ -10486,36 +10481,11 @@ document.addEventListener('DOMContentLoaded', function () {
       fetch(url).then(function (response) {
         return response.json();
       }).then(function (user) {
+        console.log(user);
         document.querySelector('#student-modal input[name="last_name"]').value = user.last_name;
         document.querySelector('#student-modal input[name="first_name"]').value = user.first_name;
         document.querySelector('#student-modal input[name="email"]').value = user.email;
         document.querySelector('#student-modal input[name="birth_date"]').value = user.birth_date;
-        document.querySelector('#student-modal select[name="school_id"]').value = user.school_id;
-      });
-    });
-  });
-});
-
-/***/ }),
-
-/***/ "./resources/js/formsteachers.js":
-/*!***************************************!*\
-  !*** ./resources/js/formsteachers.js ***!
-  \***************************************/
-/***/ (() => {
-
-document.addEventListener('DOMContentLoaded', function () {
-  document.querySelectorAll('#teacher-table .open-teacher-modal').forEach(function (link) {
-    link.addEventListener('click', function (event) {
-      var url = link.getAttribute('data-route');
-      fetch(url).then(function (response) {
-        return response.json();
-      }).then(function (user) {
-        console.log(user);
-        document.querySelector('#teacher-modal input[name="last_name"]').value = user.last_name;
-        document.querySelector('#teacher-modal input[name="first_name"]').value = user.first_name;
-        document.querySelector('#teacher-modal input[name="email"]').value = user.email;
-        document.querySelector('#teacher-modal select[name="school_id"]').value = user.school_id;
         document.querySelector('#student-modal select[name="school_id"]').value = user.school_id;
       });
     });
@@ -10566,7 +10536,7 @@ __webpack_require__.r(__webpack_exports__);
 /************************************************************************/
 /******/ 	// The module cache
 /******/ 	var __webpack_module_cache__ = {};
-/******/
+/******/ 	
 /******/ 	// The require function
 /******/ 	function __webpack_require__(moduleId) {
 /******/ 		// Check if module is in cache
@@ -10580,17 +10550,17 @@ __webpack_require__.r(__webpack_exports__);
 /******/ 			// no module.loaded needed
 /******/ 			exports: {}
 /******/ 		};
-/******/
+/******/ 	
 /******/ 		// Execute the module function
 /******/ 		__webpack_modules__[moduleId](module, module.exports, __webpack_require__);
-/******/
+/******/ 	
 /******/ 		// Return the exports of the module
 /******/ 		return module.exports;
 /******/ 	}
-/******/
+/******/ 	
 /******/ 	// expose the modules object (__webpack_modules__)
 /******/ 	__webpack_require__.m = __webpack_modules__;
-/******/
+/******/ 	
 /************************************************************************/
 /******/ 	/* webpack/runtime/chunk loaded */
 /******/ 	(() => {
@@ -10623,7 +10593,7 @@ __webpack_require__.r(__webpack_exports__);
 /******/ 			return result;
 /******/ 		};
 /******/ 	})();
-/******/
+/******/ 	
 /******/ 	/* webpack/runtime/compat get default export */
 /******/ 	(() => {
 /******/ 		// getDefaultExport function for compatibility with non-harmony modules
@@ -10635,7 +10605,7 @@ __webpack_require__.r(__webpack_exports__);
 /******/ 			return getter;
 /******/ 		};
 /******/ 	})();
-/******/
+/******/ 	
 /******/ 	/* webpack/runtime/define property getters */
 /******/ 	(() => {
 /******/ 		// define getter functions for harmony exports
@@ -10647,7 +10617,7 @@ __webpack_require__.r(__webpack_exports__);
 /******/ 			}
 /******/ 		};
 /******/ 	})();
-/******/
+/******/ 	
 /******/ 	/* webpack/runtime/global */
 /******/ 	(() => {
 /******/ 		__webpack_require__.g = (function() {
@@ -10659,12 +10629,12 @@ __webpack_require__.r(__webpack_exports__);
 /******/ 			}
 /******/ 		})();
 /******/ 	})();
-/******/
+/******/ 	
 /******/ 	/* webpack/runtime/hasOwnProperty shorthand */
 /******/ 	(() => {
 /******/ 		__webpack_require__.o = (obj, prop) => (Object.prototype.hasOwnProperty.call(obj, prop))
 /******/ 	})();
-/******/
+/******/ 	
 /******/ 	/* webpack/runtime/make namespace object */
 /******/ 	(() => {
 /******/ 		// define __esModule on exports
@@ -10675,11 +10645,11 @@ __webpack_require__.r(__webpack_exports__);
 /******/ 			Object.defineProperty(exports, '__esModule', { value: true });
 /******/ 		};
 /******/ 	})();
-/******/
+/******/ 	
 /******/ 	/* webpack/runtime/jsonp chunk loading */
 /******/ 	(() => {
 /******/ 		// no baseURI
-/******/
+/******/ 		
 /******/ 		// object to store loaded and loading chunks
 /******/ 		// undefined = chunk not loaded, null = chunk preloaded/prefetched
 /******/ 		// [resolve, reject, Promise] = chunk loading, 0 = chunk loaded
@@ -10687,19 +10657,19 @@ __webpack_require__.r(__webpack_exports__);
 /******/ 			"/js/app": 0,
 /******/ 			"css/app": 0
 /******/ 		};
-/******/
+/******/ 		
 /******/ 		// no chunk on demand loading
-/******/
+/******/ 		
 /******/ 		// no prefetching
-/******/
+/******/ 		
 /******/ 		// no preloaded
-/******/
+/******/ 		
 /******/ 		// no HMR
-/******/
+/******/ 		
 /******/ 		// no HMR manifest
-/******/
+/******/ 		
 /******/ 		__webpack_require__.O.j = (chunkId) => (installedChunks[chunkId] === 0);
-/******/
+/******/ 		
 /******/ 		// install a JSONP callback for chunk loading
 /******/ 		var webpackJsonpCallback = (parentChunkLoadingFunction, data) => {
 /******/ 			var [chunkIds, moreModules, runtime] = data;
@@ -10724,20 +10694,20 @@ __webpack_require__.r(__webpack_exports__);
 /******/ 			}
 /******/ 			return __webpack_require__.O(result);
 /******/ 		}
-/******/
+/******/ 		
 /******/ 		var chunkLoadingGlobal = self["webpackChunk"] = self["webpackChunk"] || [];
 /******/ 		chunkLoadingGlobal.forEach(webpackJsonpCallback.bind(null, 0));
 /******/ 		chunkLoadingGlobal.push = webpackJsonpCallback.bind(null, chunkLoadingGlobal.push.bind(chunkLoadingGlobal));
 /******/ 	})();
-/******/
+/******/ 	
 /************************************************************************/
-/******/
+/******/ 	
 /******/ 	// startup
 /******/ 	// Load entry module and return exports
 /******/ 	// This entry module depends on other loaded chunks and execution need to be delayed
 /******/ 	__webpack_require__.O(undefined, ["css/app"], () => (__webpack_require__("./resources/js/app.js")))
 /******/ 	var __webpack_exports__ = __webpack_require__.O(undefined, ["css/app"], () => (__webpack_require__("./resources/scss/app.scss")))
 /******/ 	__webpack_exports__ = __webpack_require__.O(__webpack_exports__);
-/******/
+/******/ 	
 /******/ })()
 ;

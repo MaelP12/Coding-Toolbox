@@ -47,6 +47,13 @@
                                     </tr>
                                     </thead>
                                     <tbody>
+                                    @if ($students->isEmpty())
+                                        <tr>
+                                            <td colspan="5" class="text-center text-gray-500">
+                                                No students create
+                                            </td>
+                                        </tr>
+                                    @else
                                     @foreach($students as $student)
                                         <tr>
                                             <td>{{$student->last_name}}</td>
@@ -71,6 +78,7 @@
                                             </td>
                                         </tr>
                                     @endforeach
+                                    @endif
                                     </tbody>
                                 </table>
                             </div>

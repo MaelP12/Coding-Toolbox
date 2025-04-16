@@ -30,23 +30,23 @@ class StudentController extends Controller
      */
 
     public function store(CreateStudentRequest $request) {
-    $randomPassword = Str::random(8);
+        $randomPassword = Str::random(8);
 
-    $user = User::create([
-        ...$request->validated(),
-        'password' => Hash::make($randomPassword),
-    ]);
+        $user = User::create([
+            ...$request->validated(),
+            'password' => Hash::make($randomPassword),
+        ]);
 
-    UserSchool::create([
-        'user_id'   => $user->id,
-        'school_id' => $request->school_id,
-        'role'      => 'student'
-    ]);
+        UserSchool::create([
+            'user_id'   => $user->id,
+            'school_id' => $request->school_id,
+            'role'      => 'student'
+        ]);
 
-    Mail::to($user->email)->send(new SendUserPassword($user, $randomPassword));
+        Mail::to($user->email)->send(new SendUserPassword($user, $randomPassword));
 
-    return back()->with('success', 'The student has been added successfully.');
-}
+        return back()->with('success', 'The student has been added successfully.');
+    }
 
 
     public function getForm(User $student)

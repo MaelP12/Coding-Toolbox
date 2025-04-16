@@ -3,6 +3,7 @@
     'title'  => 'Informations étudiant',] )
 
 @section('modal-content')
+    @if ($students->isNotEmpty())
     <form method="POST" class="card-body flex flex-col gap-5 p-5" action="{{ route('student.update', ['student' => $student]) }}">
         @csrf
 
@@ -29,4 +30,5 @@
             {{ __('Modifier') }}
         </x-forms.primary-button>
     </form>
+    @endif
 @overwrite
