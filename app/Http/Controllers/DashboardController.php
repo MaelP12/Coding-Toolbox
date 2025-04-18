@@ -20,7 +20,7 @@ class DashboardController extends Controller
                 $query->where('users_schools.role', 'teacher');
             })->count();
 
-            return view('pages.dashboard.dashboard-admin', compact('cohortcount', 'studentcount', 'teachercount',));
+            return view('pages.dashboard.dashboard-admin', compact('cohortcount', 'studentcount', 'teachercount'));
         }
 
         return view('pages.dashboard.dashboard-' . $userRole);

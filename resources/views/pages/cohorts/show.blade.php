@@ -33,7 +33,13 @@
                                         </th>
                                         <th class="min-w-[135px]">
                                             <span class="sort">
-                                                <span class="sort-label">Date de naissance</span>
+                                                <span class="sort-label">Email</span>
+                                                <span class="sort-icon"></span>
+                                            </span>
+                                        </th>
+                                        <th class="min-w-[135px]">
+                                            <span class="sort">
+                                                <span class="sort-label">Role</span>
                                                 <span class="sort-icon"></span>
                                             </span>
                                         </th>
@@ -41,30 +47,32 @@
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    @if ($students->isEmpty())
+                                    @if ($users->isEmpty())
                                         <tr>
                                             <td colspan="5" class="text-center text-gray-500">
                                                 No students create
                                             </td>
                                         </tr>
                                     @else
-                                        @foreach($students as $student)
+                                        @foreach($users as $user)
                                             <tr>
-                                                <td>{{$student->last_name}}</td>
-                                                <td>{{$student->first_name}}</td>
-                                                <td>{{$student->birth_date}}</td>
+                                                <td>{{$user->last_name}}</td>
+                                                <td>{{$user->first_name}}</td>
+                                                <td>{{$user->email}}</td>
+                                                <td>{{ $user->userschool->role ?? 'Non défini' }}</td>
+                                            @can('view-no-promotions')
                                                 <td>
                                                     <div class="flex items-center justify-between">
-                                                        <form action="{{ route('cohort.del', $student->id) }}" method="POST" onsubmit="return confirm('Do you really want to delete this student?')">
+                                                        <form action="{{ route('cohort.del', $user->id) }}" method="POST" onsubmit="return confirm('Do you really want to delete this student?')">
                                                             @csrf
                                                             @method('DELETE')
                                                             <button type="submit" class="cursor-pointer text-red-600">
                                                                 <i class="ki-filled ki-trash"></i>
                                                             </button>
                                                         </form>
-
                                                     </div>
                                                 </td>
+                                                @endcan
                                             </tr>
                                         @endforeach
                                     @endif
@@ -87,18 +95,39 @@
                 </div>
             </div>
         </div>
-        <div class="lg:col-span-1">
-            <div class="card h-full">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-4 items-stretch">
+            <div class="card flex flex-col">
                 <div class="card-header">
                     <h3 class="card-title">
-                        Ajouter un étudiant à la promotion
+                        Add student the promotion
                     </h3>
                 </div>
                 <div class="card-body flex flex-col gap-5">-
-                    <form action="{{route('cohort.add', $cohort)}}", method="POST">
+                    <form action="{{route('cohort.student', $cohort)}}" method="POST">
                         @csrf
                         <x-forms.dropdown name="user_id" :label="__('Etudiant')">
-                            @foreach($users as $user)
+                            @foreach($studentstoadd as $user)
+                                <option value="{{ $user->id }}">{{ $user->last_name }} {{ $user->first_name }}</option>
+                            @endforeach
+                        </x-forms.dropdown>
+
+                        <x-forms.primary-button>
+                            {{ __('Valider') }}
+                        </x-forms.primary-button>
+                    </form>
+                </div>
+            </div>
+            <div class="card flex flex-col">
+                <div class="card-header">
+                    <h3 class="card-title">
+                        Add teacher the promotion
+                    </h3>
+                </div>
+                <div class="card-body flex flex-col gap-5">-
+                    <form action="{{route('cohort.teacher', $cohort)}}" method="POST">
+                        @csrf
+                        <x-forms.dropdown name="user_id" :label="__('Teacher')">
+                            @foreach($teachertoadd as $user)
                                 <option value="{{ $user->id }}">{{ $user->last_name }} {{ $user->first_name }}</option>
                             @endforeach
                         </x-forms.dropdown>
@@ -110,6 +139,7 @@
                 </div>
             </div>
         </div>
+
     </div>
     <!-- end: grid -->
 </x-app-layout>

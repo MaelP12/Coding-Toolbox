@@ -65,6 +65,7 @@
                                                 </td>
                                                 <td>{{$cohort->start_date->year}}-{{$cohort->end_date->year}}</td>
                                                 <td>{{$cohort->school->name}}</td>
+                                                @can('view-no-teacher')
                                                 <td>
                                                     <div class="flex items-center justify-between">
                                                         <form action="{{ route('cohort.delete', $cohort->id) }}" method="POST" onsubmit="return confirm('Do you really want to delete this cohort?')">
@@ -83,8 +84,10 @@
                                                             <i class="ki-filled ki-cursor"></i>
                                                         </a>
 
+
                                                     </div>
                                                 </td>
+                                                @endcan
                                             </tr>
                                         @endforeach
                                     @endif
@@ -107,6 +110,7 @@
                 </div>
             </div>
         </div>
+        @can('view-no-teacher')
         <div class="lg:col-span-1">
             <div class="card h-full">
                 <div class="card-header">
@@ -146,6 +150,10 @@
                 </div>
             </div>
         </div>
+        @endcan
+
     </div>
     <!-- end: grid -->
 </x-app-layout>
+
+<!--include("pages.cohorts.cohort-modal")"

@@ -7,6 +7,7 @@ use App\Http\Requests\CreateStudentRequest;
 use App\Http\Requests\UpdateStudentRequest;
 use App\Mail\SendUserPassword;
 use App\Models\Cohort;
+use App\Models\CohortTeacher;
 use App\Models\School;
 use App\Models\User;
 use App\Models\UserSchool;
@@ -27,6 +28,7 @@ class CohortController extends Controller
     public function index()
     {
         $cohorts = Cohort::all();
+
         $schools = School::all();
 
         return view('pages.cohorts.index', compact('cohorts', 'schools'));
@@ -84,22 +86,45 @@ class CohortController extends Controller
             $query->where('cohort_id', $cohort->id);
         })->get();
 
-        $users = User::all();
+        $teachers = User::whereIn('id', function ($query) use ($cohort) {
+            $query->select('user_id')
+                ->from('cohort_teacher')
+                ->where('cohort_id', $cohort->id);
+        })->get();
+
+        $users = $teachers->merge($students);
+
+        $studentstoadd = User ::whereHas('UserSchool', function ($query) {
+            $query -> where('users_schools.role', 'student');
+        }) -> get();
+
+        $teachertoadd = User ::whereHas('UserSchool', function ($query) {
+            $query -> where('users_schools.role', 'teacher');
+        }) -> get();
 
         $cohorts = Cohort::all();
 
-        return view('pages.cohorts.show', compact('students', 'users' , 'cohort' , 'cohorts'));
+        return view('pages.cohorts.show', compact('users', 'teachertoadd' ,'studentstoadd' , 'cohort' , 'cohorts'));
     }
 
-    public function add(Request $request, $cohort) {
+    public function student(Request $request,Cohort $cohort) {
         $userSchool = UserSchool::where('user_id', $request->user_id)
             ->first();
 
-        if ($userSchool) {
-            $userSchool->update([
-                'cohort_id' => $cohort,
-            ]);
-        }
+
+        $userSchool->update([
+            'cohort_id' => $cohort->id,
+        ]);
+
+
+        return back();
+    }
+
+    public function teacher(Request $request,Cohort $cohort) {
+        CohortTeacher::create([
+            'user_id' => $request->user_id,
+            'cohort_id' => $cohort->id,
+        ]);
 
         return back();
     }

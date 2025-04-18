@@ -75,7 +75,7 @@ class User extends Authenticatable
      */
 
     /**
-     * @return HasMany
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
      */
 
 //    public function usertest()
@@ -85,7 +85,7 @@ class User extends Authenticatable
 
     public function userschool()
     {
-        return $this->hasMany(UserSchool::class);
+        return $this->hasOne(UserSchool::class);
     }
 
 
